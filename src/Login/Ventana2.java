@@ -22,9 +22,11 @@ public class Ventana2 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         freVentana2 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        lblOpcion = new javax.swing.JLabel();
         jcbOpciones = new javax.swing.JComboBox<>();
         lblImagen = new javax.swing.JLabel();
+        btnOpcion = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlLista = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("freVentana2"); // NOI18N
@@ -46,21 +48,33 @@ public class Ventana2 extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 74, -1, -1));
 
-        lblOpcion.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        lblOpcion.setText("Selecciona Una Opción:");
-        lblOpcion.setName(""); // NOI18N
-        jPanel1.add(lblOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 133, -1, -1));
-
-        jcbOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------------", "Enamorado", "Enojado", "Muerto" }));
+        jcbOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enamorado", "Enojado", "Muerto" }));
         jcbOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbOpcionesActionPerformed(evt);
             }
         });
-        jPanel1.add(jcbOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        jPanel1.add(jcbOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
 
-        lblImagen.setText("Imagen Representativa");
-        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        lblImagen.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 250, 70));
+
+        btnOpcion.setText("OPCION");
+        btnOpcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnOpcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
+
+        jlLista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Opcion 1", "Opcion 2", "Opcion 3", "Opcion 4", "Opcion 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jlLista);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 80, 110));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 300));
 
@@ -74,51 +88,39 @@ public class Ventana2 extends javax.swing.JFrame {
 
     private void jcbOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbOpcionesActionPerformed
         int op = jcbOpciones.getSelectedIndex();
+        String cadena = jcbOpciones.getSelectedItem().toString();
 
         switch (op) {
-            case 0:
-                lblImagen.setText("");
-                ruta = "";
-                url = this.getClass().getResource(ruta);
-                icon = new ImageIcon(url);
-                lblImagen.setIcon(icon);
-                lblImagen.setText("No Hay Opción Seleccionada");
-                JOptionPane.showMessageDialog(null, "No Hay Opción Seleccionada", "Opción Seleccionada", JOptionPane.INFORMATION_MESSAGE);
-                lblOpcion.setText("No Hay Opción Seleccionada");
+            case 0: 
+                this.mostrarImagen("/Imagenes/enamorado.png", op+1, cadena);   
                 break;
-            case 1:
-                lblImagen.setText("");
-                ruta = "/Imagenes/enamorado.png";
-                url = this.getClass().getResource(ruta);
-                icon = new ImageIcon(url);
-                lblImagen.setIcon(icon);
-                JOptionPane.showMessageDialog(null, "Número 1", "Opción Seleccionada", JOptionPane.INFORMATION_MESSAGE);
-                lblOpcion.setText("Selecciona La Opción 1");
+            case 1: 
+                this.mostrarImagen("/Imagenes/enojado.png", op+1, cadena);
                 break;
-            case 2:
-                lblImagen.setText("");
-                ruta = "/Imagenes/enojado.png";
-                url = this.getClass().getResource(ruta);
-                icon = new ImageIcon(url);
-                lblImagen.setIcon(icon);
-                JOptionPane.showMessageDialog(null, "Número 2", "Opción Seleccionada", JOptionPane.INFORMATION_MESSAGE);
-                lblOpcion.setText("Selecciona La Opción 2");
-                break;
-            case 3:
-                lblImagen.setText("");
-                ruta = "/Imagenes/muerto.png";
-                url = this.getClass().getResource(ruta);
-                icon = new ImageIcon(url);
-                lblImagen.setIcon(icon);
-                JOptionPane.showMessageDialog(null, "Número 3", "Opción Seleccionada", JOptionPane.INFORMATION_MESSAGE);
-                lblOpcion.setText("Selecciona La Opción 3");
+            case 2: 
+                this.mostrarImagen("/Imagenes/muerto.png", op+1, cadena);
                 break;
         }
     }//GEN-LAST:event_jcbOpcionesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionActionPerformed
+        int opc = jlLista.getSelectedIndex();
+        switch (opc) {
+            case 0: 
+            case 1: 
+            case 2: 
+            case 3: 
+            case 4: 
+                mostrarCuadro(opc + 1);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Selecciona Una De Las Opciones", "Opcion Seleccionada", JOptionPane.INFORMATION_MESSAGE);
+                break;
+        }
+        
+        
+    }//GEN-LAST:event_btnOpcionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -150,13 +152,28 @@ public class Ventana2 extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void mostrarImagen(String urlImagen, int opcion, String cad){
+                url = this.getClass().getResource(urlImagen);
+                icon = new ImageIcon(url);
+                lblImagen.setIcon(icon);
+                lblImagen.setText("Opción: " + opcion + "\n Texto: " + cad);
+    }
+    
+     private void mostrarCuadro(int opc) {
+            JOptionPane.showMessageDialog(null, "Opcion No: " + opc, "Opcion Seleccionada", JOptionPane.INFORMATION_MESSAGE);
 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOpcion;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel freVentana2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbOpciones;
+    private javax.swing.JList<String> jlLista;
     private javax.swing.JLabel lblImagen;
-    private javax.swing.JLabel lblOpcion;
     // End of variables declaration//GEN-END:variables
+
 }
